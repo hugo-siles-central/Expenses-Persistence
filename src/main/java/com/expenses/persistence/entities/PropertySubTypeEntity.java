@@ -1,41 +1,41 @@
-package com.autoexpenses.entities;
+package com.expenses.persistence.entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
 @Table(name = "property_sub_type", schema = "auto_expensas", catalog = "")
 public class PropertySubTypeEntity {
-    private Integer id;
-    private Serializable type;
+    private Long id;
+    private Enum type;
     private String description;
-    private Integer condoId;
+    private Long condoId;
     private Collection<PropertyEntity> propertiesById;
     private CondoEntity condoByCondoId;
 
     @Id
-    @Column(name = "id")
-    public Integer getId() {
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
-    @Column(name = "type")
-    public Serializable getType() {
+    @Column(name = "type", nullable = false)
+    public Enum getType() {
         return type;
     }
 
-    public void setType(Serializable type) {
+    public void setType(Enum type) {
         this.type = type;
     }
 
     @Basic
-    @Column(name = "description")
+    @Column(name = "description", nullable = false, length = 45)
     public String getDescription() {
         return description;
     }
@@ -45,12 +45,12 @@ public class PropertySubTypeEntity {
     }
 
     @Basic
-    @Column(name = "condo_id")
-    public Integer getCondoId() {
+    @Column(name = "condo_id", nullable = false, insertable = false, updatable = false)
+    public Long getCondoId() {
         return condoId;
     }
 
-    public void setCondoId(Integer condoId) {
+    public void setCondoId(Long condoId) {
         this.condoId = condoId;
     }
 

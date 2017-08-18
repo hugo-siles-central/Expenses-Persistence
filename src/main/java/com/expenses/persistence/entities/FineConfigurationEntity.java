@@ -1,4 +1,4 @@
-package com.autoexpenses.entities;
+package com.expenses.persistence.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,28 +8,29 @@ import java.util.Collection;
 @Entity
 @Table(name = "fine_configuration", schema = "auto_expensas", catalog = "")
 public class FineConfigurationEntity {
-    private Integer id;
+    private Long id;
     private BigDecimal amount;
     private Serializable amountType;
     private Integer validDays;
-    private Serializable accumulative;
-    private Integer condoId;
+    private Enum accumulative;
+    private Long condoId;
     private Collection<ExpenseEntity> expensesById;
     private Collection<ExtraFeeEntity> extraFeesById;
     private CondoEntity condoByCondoId;
 
     @Id
-    @Column(name = "id")
-    public Integer getId() {
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
-    @Column(name = "amount")
+    @Column(name = "amount", nullable = false, precision = 2)
     public BigDecimal getAmount() {
         return amount;
     }
@@ -39,7 +40,7 @@ public class FineConfigurationEntity {
     }
 
     @Basic
-    @Column(name = "amount_type")
+    @Column(name = "amount_type", nullable = false)
     public Serializable getAmountType() {
         return amountType;
     }
@@ -49,7 +50,7 @@ public class FineConfigurationEntity {
     }
 
     @Basic
-    @Column(name = "valid_days")
+    @Column(name = "valid_days", nullable = false)
     public Integer getValidDays() {
         return validDays;
     }
@@ -59,22 +60,22 @@ public class FineConfigurationEntity {
     }
 
     @Basic
-    @Column(name = "accumulative")
-    public Serializable getAccumulative() {
+    @Column(name = "accumulative", nullable = false)
+    public Enum getAccumulative() {
         return accumulative;
     }
 
-    public void setAccumulative(Serializable accumulative) {
+    public void setAccumulative(Enum accumulative) {
         this.accumulative = accumulative;
     }
 
     @Basic
-    @Column(name = "condo_id")
-    public Integer getCondoId() {
+    @Column(name = "condo_id", nullable = false, insertable = false, updatable = false)
+    public Long getCondoId() {
         return condoId;
     }
 
-    public void setCondoId(Integer condoId) {
+    public void setCondoId(Long condoId) {
         this.condoId = condoId;
     }
 

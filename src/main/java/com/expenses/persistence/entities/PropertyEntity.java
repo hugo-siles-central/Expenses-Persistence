@@ -1,37 +1,37 @@
-package com.autoexpenses.entities;
+package com.expenses.persistence.entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
 @Table(name = "property", schema = "auto_expensas", catalog = "")
 public class PropertyEntity {
-    private Integer id;
+    private Long id;
     private String code;
-    private Serializable type;
-    private Integer condoId;
-    private Integer subTypeId;
-    private Integer ownerId;
+    private Enum type;
+    private Long condoId;
+    private Long subTypeId;
+    private Long ownerId;
     private Collection<ExpenseEntity> expensesById;
     private Collection<ExtraFeeEntity> extraFeesById;
-    private Collection<FineEntity> finesById;
     private CondoEntity condoByCondoId;
     private PropertySubTypeEntity propertySubTypeBySubTypeId;
     private OwnerEntity ownerByOwnerId;
+    private Collection<PropertyFineEntity> propertyFinesById;
 
     @Id
-    @Column(name = "id")
-    public Integer getId() {
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
-    @Column(name = "code")
+    @Column(name = "code", nullable = false, length = 45)
     public String getCode() {
         return code;
     }
@@ -41,42 +41,42 @@ public class PropertyEntity {
     }
 
     @Basic
-    @Column(name = "type")
-    public Serializable getType() {
+    @Column(name = "type", nullable = false)
+    public Enum getType() {
         return type;
     }
 
-    public void setType(Serializable type) {
+    public void setType(Enum type) {
         this.type = type;
     }
 
     @Basic
-    @Column(name = "condo_id")
-    public Integer getCondoId() {
+    @Column(name = "condo_id", nullable = false, insertable = false, updatable = false)
+    public Long getCondoId() {
         return condoId;
     }
 
-    public void setCondoId(Integer condoId) {
+    public void setCondoId(Long condoId) {
         this.condoId = condoId;
     }
 
     @Basic
-    @Column(name = "sub_type_id")
-    public Integer getSubTypeId() {
+    @Column(name = "sub_type_id", nullable = false, insertable = false, updatable = false)
+    public Long getSubTypeId() {
         return subTypeId;
     }
 
-    public void setSubTypeId(Integer subTypeId) {
+    public void setSubTypeId(Long subTypeId) {
         this.subTypeId = subTypeId;
     }
 
     @Basic
-    @Column(name = "owner_id")
-    public Integer getOwnerId() {
+    @Column(name = "owner_id", nullable = false, insertable = false, updatable = false)
+    public Long getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(Integer ownerId) {
+    public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
     }
 
@@ -126,15 +126,6 @@ public class PropertyEntity {
         this.extraFeesById = extraFeesById;
     }
 
-    @OneToMany(mappedBy = "propertyByExternalEntityId")
-    public Collection<FineEntity> getFinesById() {
-        return finesById;
-    }
-
-    public void setFinesById(Collection<FineEntity> finesById) {
-        this.finesById = finesById;
-    }
-
     @ManyToOne
     @JoinColumn(name = "condo_id", referencedColumnName = "id", nullable = false)
     public CondoEntity getCondoByCondoId() {
@@ -163,5 +154,14 @@ public class PropertyEntity {
 
     public void setOwnerByOwnerId(OwnerEntity ownerByOwnerId) {
         this.ownerByOwnerId = ownerByOwnerId;
+    }
+
+    @OneToMany(mappedBy = "propertyByPropertyId")
+    public Collection<PropertyFineEntity> getPropertyFinesById() {
+        return propertyFinesById;
+    }
+
+    public void setPropertyFinesById(Collection<PropertyFineEntity> propertyFinesById) {
+        this.propertyFinesById = propertyFinesById;
     }
 }

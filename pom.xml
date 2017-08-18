@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.autoexpenses</groupId>
-	<artifactId>autoexpenses-persistence</artifactId>
+	<artifactId>expenses-persistence</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>autoexpenses-persistence</name>
+	<name>expenses-persistence</name>
 	<description>persistence layer for auto expenses</description>
 
 	<parent>
@@ -30,14 +30,6 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-core</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
@@ -47,6 +39,24 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>2.5.1</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>junit</artifactId>
+                    <groupId>junit</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.github.springtestdbunit</groupId>
+            <artifactId>spring-test-dbunit</artifactId>
+            <version>1.2.1</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -54,6 +64,16 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>exec</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
 			</plugin>
 		</plugins>
 	</build>

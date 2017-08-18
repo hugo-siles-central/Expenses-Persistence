@@ -1,4 +1,4 @@
-package com.autoexpenses.entities;
+package com.expenses.persistence.entities;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -6,10 +6,10 @@ import java.util.Collection;
 @Entity
 @Table(name = "condo", schema = "auto_expensas", catalog = "")
 public class CondoEntity {
-    private Integer id;
+    private Long id;
     private String name;
     private String address;
-    private String telefonos;
+    private String phones;
     private Collection<ExpenseConfigurationEntity> expenseConfigurationsById;
     private Collection<FineConfigurationEntity> fineConfigurationsById;
     private Collection<OwnerEntity> ownersById;
@@ -17,17 +17,18 @@ public class CondoEntity {
     private Collection<PropertySubTypeEntity> propertySubTypesById;
 
     @Id
-    @Column(name = "id")
-    public Integer getId() {
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 45)
     public String getName() {
         return name;
     }
@@ -37,7 +38,7 @@ public class CondoEntity {
     }
 
     @Basic
-    @Column(name = "address")
+    @Column(name = "address", nullable = false, length = 45)
     public String getAddress() {
         return address;
     }
@@ -47,13 +48,13 @@ public class CondoEntity {
     }
 
     @Basic
-    @Column(name = "telefonos")
-    public String getTelefonos() {
-        return telefonos;
+    @Column(name = "phones", nullable = true, length = 45)
+    public String getPhones() {
+        return phones;
     }
 
-    public void setTelefonos(String telefonos) {
-        this.telefonos = telefonos;
+    public void setPhones(String phones) {
+        this.phones = phones;
     }
 
     @Override
@@ -66,7 +67,7 @@ public class CondoEntity {
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
-        if (telefonos != null ? !telefonos.equals(that.telefonos) : that.telefonos != null) return false;
+        if (phones != null ? !phones.equals(that.phones) : that.phones != null) return false;
 
         return true;
     }
@@ -76,7 +77,7 @@ public class CondoEntity {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (telefonos != null ? telefonos.hashCode() : 0);
+        result = 31 * result + (phones != null ? phones.hashCode() : 0);
         return result;
     }
 
