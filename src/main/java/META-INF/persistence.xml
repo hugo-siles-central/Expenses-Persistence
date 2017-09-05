@@ -3,20 +3,23 @@
 
     <persistence-unit name="NewPersistenceUnit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.autoexpenses.entities.CondoEntity</class>
-        <class>com.autoexpenses.entities.ExpenseEntity</class>
-        <class>com.autoexpenses.entities.ExpenseConfigurationEntity</class>
-        <class>com.autoexpenses.entities.ExtraFeeEntity</class>
-        <class>com.autoexpenses.entities.FineEntity</class>
-        <class>com.autoexpenses.entities.FineConfigurationEntity</class>
-        <class>com.autoexpenses.entities.OwnerEntity</class>
-        <class>com.autoexpenses.entities.PropertyEntity</class>
-        <class>com.autoexpenses.entities.PropertySubTypeEntity</class>
+        <class>com.expenses.persistence.entities.CondoEntity</class>
+        <class>com.expenses.persistence.entities.ExpenseEntity</class>
+        <class>com.expenses.persistence.entities.ExpenseConfigurationEntity</class>
+        <class>com.expenses.persistence.entities.ExpenseFineEntity</class>
+        <class>com.expenses.persistence.entities.ExtraFeeEntity</class>
+        <class>com.expenses.persistence.entities.ExtraFeeFineEntity</class>
+        <class>com.expenses.persistence.entities.FineEntity</class>
+        <class>com.expenses.persistence.entities.FineConfigurationEntity</class>
+        <class>com.expenses.persistence.entities.OwnerEntity</class>
+        <class>com.expenses.persistence.entities.PropertyEntity</class>
+        <class>com.expenses.persistence.entities.PropertyFineEntity</class>
+        <class>com.expenses.persistence.entities.PropertySubTypeEntity</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/auto_expensas"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-            <property name="hibernate.connection.username" value="expdev"/>
-            <property name="hibernate.connection.password" value="expdev"/>
+            <property name="hibernate.connection.username" value=""/>
+            <property name="hibernate.connection.password" value=""/>
             <property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>

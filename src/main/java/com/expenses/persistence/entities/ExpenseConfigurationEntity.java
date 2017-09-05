@@ -1,56 +1,56 @@
-package com.autoexpenses.entities;
+package com.expenses.persistence.entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 
 @Entity
 @Table(name = "expense_configuration", schema = "auto_expensas", catalog = "")
 public class ExpenseConfigurationEntity {
-    private Integer id;
-    private Serializable type;
-    private Serializable propertyType;
+    private Long id;
+    private Enum type;
+    private Enum propertyType;
     private BigDecimal amount;
-    private Serializable attribute;
-    private String atributeValue;
+    private Enum attribute;
+    private String attributeValue;
     private Integer validDays;
-    private Integer condoId;
+    private Long condoId;
     private Collection<ExpenseEntity> expensesById;
     private CondoEntity condoByCondoId;
 
     @Id
-    @Column(name = "id")
-    public Integer getId() {
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
-    @Column(name = "type")
-    public Serializable getType() {
+    @Column(name = "type", nullable = false)
+    public Enum getType() {
         return type;
     }
 
-    public void setType(Serializable type) {
+    public void setType(Enum type) {
         this.type = type;
     }
 
     @Basic
-    @Column(name = "property_type")
-    public Serializable getPropertyType() {
+    @Column(name = "property_type", nullable = false)
+    public Enum getPropertyType() {
         return propertyType;
     }
 
-    public void setPropertyType(Serializable propertyType) {
+    public void setPropertyType(Enum propertyType) {
         this.propertyType = propertyType;
     }
 
     @Basic
-    @Column(name = "amount")
+    @Column(name = "amount", nullable = false, precision = 2)
     public BigDecimal getAmount() {
         return amount;
     }
@@ -60,27 +60,27 @@ public class ExpenseConfigurationEntity {
     }
 
     @Basic
-    @Column(name = "attribute")
-    public Serializable getAttribute() {
+    @Column(name = "attribute", nullable = false)
+    public Enum getAttribute() {
         return attribute;
     }
 
-    public void setAttribute(Serializable attribute) {
+    public void setAttribute(Enum attribute) {
         this.attribute = attribute;
     }
 
     @Basic
-    @Column(name = "atribute_value")
-    public String getAtributeValue() {
-        return atributeValue;
+    @Column(name = "attribute_value", nullable = false, length = 45)
+    public String getAttributeValue() {
+        return attributeValue;
     }
 
-    public void setAtributeValue(String atributeValue) {
-        this.atributeValue = atributeValue;
+    public void setAttributeValue(String attributeValue) {
+        this.attributeValue = attributeValue;
     }
 
     @Basic
-    @Column(name = "valid_days")
+    @Column(name = "valid_days", nullable = false)
     public Integer getValidDays() {
         return validDays;
     }
@@ -90,12 +90,12 @@ public class ExpenseConfigurationEntity {
     }
 
     @Basic
-    @Column(name = "condo_id")
-    public Integer getCondoId() {
+    @Column(name = "condo_id", nullable = false, insertable = false, updatable = false)
+    public Long getCondoId() {
         return condoId;
     }
 
-    public void setCondoId(Integer condoId) {
+    public void setCondoId(Long condoId) {
         this.condoId = condoId;
     }
 
@@ -111,7 +111,7 @@ public class ExpenseConfigurationEntity {
         if (propertyType != null ? !propertyType.equals(that.propertyType) : that.propertyType != null) return false;
         if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
         if (attribute != null ? !attribute.equals(that.attribute) : that.attribute != null) return false;
-        if (atributeValue != null ? !atributeValue.equals(that.atributeValue) : that.atributeValue != null)
+        if (attributeValue != null ? !attributeValue.equals(that.attributeValue) : that.attributeValue != null)
             return false;
         if (validDays != null ? !validDays.equals(that.validDays) : that.validDays != null) return false;
         if (condoId != null ? !condoId.equals(that.condoId) : that.condoId != null) return false;
@@ -126,7 +126,7 @@ public class ExpenseConfigurationEntity {
         result = 31 * result + (propertyType != null ? propertyType.hashCode() : 0);
         result = 31 * result + (amount != null ? amount.hashCode() : 0);
         result = 31 * result + (attribute != null ? attribute.hashCode() : 0);
-        result = 31 * result + (atributeValue != null ? atributeValue.hashCode() : 0);
+        result = 31 * result + (attributeValue != null ? attributeValue.hashCode() : 0);
         result = 31 * result + (validDays != null ? validDays.hashCode() : 0);
         result = 31 * result + (condoId != null ? condoId.hashCode() : 0);
         return result;

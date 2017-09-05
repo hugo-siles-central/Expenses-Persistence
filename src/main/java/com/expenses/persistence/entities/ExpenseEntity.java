@@ -1,7 +1,6 @@
-package com.autoexpenses.entities;
+package com.expenses.persistence.entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Collection;
@@ -9,32 +8,33 @@ import java.util.Collection;
 @Entity
 @Table(name = "expense", schema = "auto_expensas", catalog = "")
 public class ExpenseEntity {
-    private Integer id;
+    private Long id;
     private BigDecimal amount;
-    private Serializable status;
+    private Enum status;
     private Date creationDate;
     private Date dueDate;
     private Date period;
-    private Integer expenseConfigurationId;
-    private Integer propertyId;
-    private Integer fineConfigurationId;
+    private Long expenseConfigurationId;
+    private Long propertyId;
+    private Long fineConfigurationId;
     private ExpenseConfigurationEntity expenseConfigurationByExpenseConfigurationId;
     private PropertyEntity propertyByPropertyId;
     private FineConfigurationEntity fineConfigurationByFineConfigurationId;
-    private Collection<FineEntity> finesById;
+    private Collection<ExpenseFineEntity> expenseFinesById;
 
     @Id
-    @Column(name = "id")
-    public Integer getId() {
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
-    @Column(name = "amount")
+    @Column(name = "amount", nullable = false, precision = 2)
     public BigDecimal getAmount() {
         return amount;
     }
@@ -44,17 +44,17 @@ public class ExpenseEntity {
     }
 
     @Basic
-    @Column(name = "status")
-    public Serializable getStatus() {
+    @Column(name = "status", nullable = false)
+    public Enum getStatus() {
         return status;
     }
 
-    public void setStatus(Serializable status) {
+    public void setStatus(Enum status) {
         this.status = status;
     }
 
     @Basic
-    @Column(name = "creation_date")
+    @Column(name = "creation_date", nullable = false)
     public Date getCreationDate() {
         return creationDate;
     }
@@ -64,7 +64,7 @@ public class ExpenseEntity {
     }
 
     @Basic
-    @Column(name = "due_date")
+    @Column(name = "due_date", nullable = false)
     public Date getDueDate() {
         return dueDate;
     }
@@ -74,7 +74,7 @@ public class ExpenseEntity {
     }
 
     @Basic
-    @Column(name = "period")
+    @Column(name = "period", nullable = false)
     public Date getPeriod() {
         return period;
     }
@@ -84,32 +84,32 @@ public class ExpenseEntity {
     }
 
     @Basic
-    @Column(name = "expense_configuration_id")
-    public Integer getExpenseConfigurationId() {
+    @Column(name = "expense_configuration_id", nullable = false, insertable = false, updatable = false)
+    public Long getExpenseConfigurationId() {
         return expenseConfigurationId;
     }
 
-    public void setExpenseConfigurationId(Integer expenseConfigurationId) {
+    public void setExpenseConfigurationId(Long expenseConfigurationId) {
         this.expenseConfigurationId = expenseConfigurationId;
     }
 
     @Basic
-    @Column(name = "property_id")
-    public Integer getPropertyId() {
+    @Column(name = "property_id", nullable = false)
+    public Long getPropertyId() {
         return propertyId;
     }
 
-    public void setPropertyId(Integer propertyId) {
+    public void setPropertyId(Long propertyId) {
         this.propertyId = propertyId;
     }
 
     @Basic
-    @Column(name = "fine_configuration_id")
-    public Integer getFineConfigurationId() {
+    @Column(name = "fine_configuration_id", nullable = false, insertable = false, updatable = false)
+    public Long getFineConfigurationId() {
         return fineConfigurationId;
     }
 
-    public void setFineConfigurationId(Integer fineConfigurationId) {
+    public void setFineConfigurationId(Long fineConfigurationId) {
         this.fineConfigurationId = fineConfigurationId;
     }
 
@@ -160,7 +160,7 @@ public class ExpenseEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "property_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "property_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     public PropertyEntity getPropertyByPropertyId() {
         return propertyByPropertyId;
     }
@@ -179,12 +179,12 @@ public class ExpenseEntity {
         this.fineConfigurationByFineConfigurationId = fineConfigurationByFineConfigurationId;
     }
 
-    @OneToMany(mappedBy = "expenseByExternalEntityId")
-    public Collection<FineEntity> getFinesById() {
-        return finesById;
+    @OneToMany(mappedBy = "expenseByExpenseId")
+    public Collection<ExpenseFineEntity> getExpenseFinesById() {
+        return expenseFinesById;
     }
 
-    public void setFinesById(Collection<FineEntity> finesById) {
-        this.finesById = finesById;
+    public void setExpenseFinesById(Collection<ExpenseFineEntity> expenseFinesById) {
+        this.expenseFinesById = expenseFinesById;
     }
 }

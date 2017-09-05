@@ -1,4 +1,4 @@
-package com.autoexpenses.entities;
+package com.expenses.persistence.entities;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -6,29 +6,30 @@ import java.util.Collection;
 @Entity
 @Table(name = "owner", schema = "auto_expensas", catalog = "")
 public class OwnerEntity {
-    private Integer id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String address;
     private String ci;
     private String phone1;
     private String phone2;
-    private Integer condoId;
+    private Long condoId;
     private CondoEntity condoByCondoId;
     private Collection<PropertyEntity> propertiesById;
 
     @Id
-    @Column(name = "id")
-    public Integer getId() {
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false, length = 45)
     public String getFirstName() {
         return firstName;
     }
@@ -38,7 +39,7 @@ public class OwnerEntity {
     }
 
     @Basic
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false, length = 45)
     public String getLastName() {
         return lastName;
     }
@@ -48,7 +49,7 @@ public class OwnerEntity {
     }
 
     @Basic
-    @Column(name = "address")
+    @Column(name = "address", nullable = true, length = 75)
     public String getAddress() {
         return address;
     }
@@ -58,7 +59,7 @@ public class OwnerEntity {
     }
 
     @Basic
-    @Column(name = "ci")
+    @Column(name = "ci", nullable = true, length = 45)
     public String getCi() {
         return ci;
     }
@@ -68,7 +69,7 @@ public class OwnerEntity {
     }
 
     @Basic
-    @Column(name = "phone1")
+    @Column(name = "phone1", nullable = true, length = 45)
     public String getPhone1() {
         return phone1;
     }
@@ -78,7 +79,7 @@ public class OwnerEntity {
     }
 
     @Basic
-    @Column(name = "phone2")
+    @Column(name = "phone2", nullable = true, length = 45)
     public String getPhone2() {
         return phone2;
     }
@@ -88,12 +89,12 @@ public class OwnerEntity {
     }
 
     @Basic
-    @Column(name = "condo_id")
-    public Integer getCondoId() {
+    @Column(name = "condo_id", nullable = false, insertable = false, updatable = false)
+    public Long getCondoId() {
         return condoId;
     }
 
-    public void setCondoId(Integer condoId) {
+    public void setCondoId(Long condoId) {
         this.condoId = condoId;
     }
 

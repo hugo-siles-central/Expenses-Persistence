@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <condo id="1"
+           name="Juan Pablo 2do - Fase II"
+           address="Av Dorbigny esq Juan Claure"
+           phones="70710554"/>
+    <condo id="2"
+           name="ESENI"
+           address="Av America esq Eduardo Caba"
+           phones="null"/>
+</dataset>
